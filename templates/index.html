@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FaceRecognition</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#ffffff">
+    <script src="{{ url_for('static', filename='assets/js/config.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendors/dropzone/dropzone.min.css') }}"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <link href="{{ url_for('static', filename='assets/css/theme-rtl.min.css') }}" rel="stylesheet" id="style-rtl">
+    <link href="{{ url_for('static', filename='assets/css/theme.min.css') }}" rel="stylesheet" id="style-default">
+    <script>
+      var isRTL = JSON.parse(localStorage.getItem('isRTL'));
+      if (isRTL) {
+        var linkDefault = document.getElementById('style-default');
+        var userLinkDefault = document.getElementById('user-style-default');
+        linkDefault.setAttribute('disabled', true);
+        userLinkDefault.setAttribute('disabled', true);
+        document.querySelector('html').setAttribute('dir', 'rtl');
+      } else {
+        var linkRTL = document.getElementById('style-rtl');
+        var userLinkRTL = document.getElementById('user-style-rtl');
+        linkRTL.setAttribute('disabled', true);
+        userLinkRTL.setAttribute('disabled', true);
+      }
+    </script>
+
+</head>
+<body class="container h-100 d-flex justify-content-center mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0"></h5>
+        </div>
+            <div class="card-body bg-light">
+                <form class="dropzone dropzone-multiple p-0" id="my-awesome-dropzone" data-dropzone="data-dropzone" action="detectFace">
+                    <div class="fallback"><input name="file" type="file" multiple="multiple" /></div>
+                    <div class="dz-message" data-dz-message="data-dz-message"> <img class="me-2" src="{{url_for('static', filename='img/cloud-upload.svg')}}" width="25" alt="" />Drop your files here</div>
+                    <div class="dz-preview dz-preview-multiple m-0 d-flex flex-column">
+                        <div class="d-flex media align-items-center mb-3 pb-3 border-bottom btn-reveal-trigger"><img class="dz-image" src="{{url_for('static', filename='img/image-file-2.png')}}" alt="..." data-dz-thumbnail="data-dz-thumbnail" />
+                        <div class="flex-1 d-flex flex-between-center">
+                            <div>
+                                <h6 data-dz-name="data-dz-name"></h6>
+                                <div class="d-flex align-items-center">
+                                  <p class="mb-0 fs--1 text-400 lh-1" data-dz-size="data-dz-size"></p>
+                                  <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
+                                </div>
+                            </div>
+                            <div class="dropdown font-sans-serif"><button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal dropdown-caret-none" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-ellipsis-h"></span></button>
+                                <div class="dropdown-menu dropdown-menu-end border py-2"><a class="dropdown-item" href="#!" data-dz-remove="data-dz-remove">Remove File</a></div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                </form>
+        </div>
+    </div>
+    <script type="javascript">
+        alert("dvkjdsv");
+    </script>
+    <script src="{{ url_for('static', filename='vendors/popper/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendors/bootstrap/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendors/anchorjs/anchor.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendors/dropzone/dropzone.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendors/fontawesome/all.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendors/lodash/lodash.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/theme.js') }}"></script>
+
+
+</body>
+</html>
