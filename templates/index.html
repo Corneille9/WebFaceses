@@ -49,14 +49,55 @@
                                 </div>
                             </div>
                             <div class="dropdown font-sans-serif"><button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal dropdown-caret-none" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-ellipsis-h"></span></button>
-                                <div class="dropdown-menu dropdown-menu-end border py-2"><a class="dropdown-item" href="#!" data-dz-remove="data-dz-remove">Remove File</a></div>
+                                <div class="dropdown-menu dropdown-menu-end border py-2">
+                                    <a class="dropdown-item" href="#!" data-dz-remove="data-dz-remove">Remove File</a>
+                                    <a class="d-flex dropdown-item outputShower" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="pointer-events: none;">
+                                        Image processing...
+                                        <div class="text-center">
+                                            <div class="spinner-grow spinner-grow-sm text-danger ml-1" role="status" style="max-size:2px!important">
+                                                <span class="visually-hidden">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         </div>
                     </div>
                 </form>
+                <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" data-bs-backdrop="static" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg mt-6" role="document">
+                        <div class="modal-content border-0">
+                            <div class="position-absolute top-0 end-0 mt-3 me-3 z-index-1"><button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                            <div class="modal-body p-0">
+                                <div class=" rounded-top-lg py-3 ps-4 pe-6">
+                                    <h4 class="mb-1" id="staticBackdropLabel">Output</h4>
+                                    <p class="fs--2 mb-0">Develop by <a class="link-600 fw-semi-bold" href="https://github.com/Corneille9" target="_blank">Corneille</a></p>
+                                </div>
+                                    <div class="p-4">
+                                          <div class="row">
+                                            <div class="col-lg-9">
+                                              <div class=""><span class="fa-stack ms-n1 me-3"><i class="fas fa-circle fa-stack-2x text-200"></i><i class="fa-inverse fa-stack-1x text-primary fas fa-code" data-fa-transform="shrink-2"></i></span>
+                                                <div class="flex-1">
+                                                    <pre class="scrollbar border-0 w-75 mw-75 bg-dark ml-5"><code class="text-primary font-weight-bold" id="output"></code></pre>
+                                                  <hr class="my-4" />
+                                                </div>
+                                              </div>
+                                              <div class="d-flex"><span class="fa-stack ms-n1 me-3"><i class="fas fa-circle fa-stack-2x text-200"></i><i class="fa-inverse fa-stack-1x text-primary fas fa-align-left" data-fa-transform="shrink-2"></i></span>
+                                                <div class="flex-1">
+                                                  <h5 class="mb-2 fs-0">Description</h5>
+                                                  <p class="text-word-break fs--1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A consequuntur corporis, dolor doloribus, eligendi enim error id iusto laborum nulla numquam optio quos rem saepe sed sit suscipit tempora! Harum.</p>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
         </div>
-        <pre class="dark"><code id=account></code></pre>
     </div>
     <script src="{{ url_for('static', filename='vendors/popper/popper.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
@@ -66,36 +107,5 @@
     <script src="{{ url_for('static', filename='vendors/fontawesome/all.min.js') }}"></script>
     <script src="{{ url_for('static', filename='vendors/lodash/lodash.min.js') }}"></script>
     <script src="{{ url_for('static', filename='assets/js/theme.js') }}"></script>
-
- <script>
-
-if (!library)
-   var library = {};
-
-library.json = {
-   replacer: function(match, pIndent, pKey, pVal, pEnd) {
-      var key = '<span class=json-key>';
-      var val = '<span class=json-value>';
-      var str = '<span class=json-string>';
-      var r = pIndent || '';
-      if (pKey)
-         r = r + key + pKey.replace(/[": ]/g, '') + '</span>: ';
-      if (pVal)
-         r = r + (pVal[0] == '"' ? str : val) + pVal + '</span>';
-      return r + (pEnd || '');
-      },
-   prettyPrint: function(obj) {
-      var jsonLine = /^( *)("[\w]+": )?("[^"]*"|[\w.+-]*)?([,[{])?$/mg;
-      return JSON.stringify(obj, null, 3)
-         .replace(/&/g, '&amp;').replace(/\\"/g, '&quot;')
-         .replace(/</g, '&lt;').replace(/>/g, '&gt;')
-         .replace(jsonLine, library.json.replacer);
-      }
-   };
-
-var account = {{detected_faces|safe}}
-$('#account').html(library.json.prettyPrint(account));
-    </script>
-
 </body>
 </html>

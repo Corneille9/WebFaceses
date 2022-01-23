@@ -982,7 +982,7 @@ var dropzoneInit = function dropzoneInit() {
     userOptions = userOptions || {};
     var data = userOptions.data ? userOptions.data : {};
     var options = merge({
-      url: '/detectFace',
+      url: '/upload',
       addRemoveLinks: false,
       previewsContainer: item.querySelector(Selector.DZ_PREVIEW),
       previewTemplate: item.querySelector(Selector.DZ_PREVIEW).innerHTML,
@@ -1027,34 +1027,33 @@ var dropzoneInit = function dropzoneInit() {
 
       item.classList.add(ClassName.DZ_FILE_PROCESSING);
     });
-    dropzone.on(Events.COMPLETE, function () {
+    dropzone.on(Events.COMPLETE, function (file) {
       if (item.querySelector(Selector.DZ_PREVIEW_COVER)) {
         item.querySelector(Selector.DZ_PREVIEW_COVER).classList.remove(ClassName.DZ_PROCESSING);
       }
-
       item.classList.add(ClassName.DZ_FILE_COMPLETE);
 
+      $.ajax({
+        type: "POST",
+        url: "/detectFace",
+        data: JSON.stringify({'data': file["name"]}),
+        contentType: "application/json",
+        dataType: 'json',
+        success: function(response) {
+            for (let outputLink of file.previewElement.querySelectorAll(".outputShower")) {
+                outputLink.style.removeProperty('pointer-events');
+                outputLink.innerText = "Show Output";
+                outputLink.addEventListener("click", function(){
+                    document.getElementById('output').innerHTML = JSON.stringify(response, null, 6).replace(/\n( *)/g, function (match, p1) {
+                        return '<br>' + '&nbsp;'.repeat(p1.length);
+                    });
+                });
+            }
+            console.log(response);
+        }
+        });
+
     });
-//    dropzone.on(Events.SUCCESS, function () {
-//    $.ajax({
-//        type: "POST",
-//        url: "/detectFace",
-//        data: new FormData($("#my-awesome-dropzone")[0]),
-//        processData: false,
-//        contentType: false,
-//        success: function(msg) {
-//        if(msg != ""){
-//        window.location.href = msg;
-//        alert(msg);
-//        }
-//        },
-//    });
-//    if (item.querySelector(Selector.DZ_PREVIEW_COVER)) {
-//        item.querySelector(Selector.DZ_PREVIEW_COVER).classList.remove(ClassName.DZ_PROCESSING);
-//      }
-//
-//      item.classList.add(ClassName.DZ_FILE_COMPLETE);
-//    }
   });
 };
 /* -------------------------------------------------------------------------- */

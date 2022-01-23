@@ -41,6 +41,7 @@ class FaceRecognition:
         facesCurFrame = face_recognition.face_locations(imgS)
         encodesCurFrame = face_recognition.face_encodings(imgS, facesCurFrame)
 
+        detect = False
         for encodeFace, faceLoc in zip(encodesCurFrame, facesCurFrame):
             matches = face_recognition.compare_faces(encodeListKnown, encodeFace)
             faceDis = face_recognition.face_distance(encodeListKnown, encodeFace)
@@ -48,5 +49,8 @@ class FaceRecognition:
             matchIndex = np.argmin(faceDis)
 
             if matches[matchIndex]:
-                detected_faces.append({"UploadFileName": file, "name": self.classNames[matchIndex].upper(), "facedir": round(faceDis[0], 2)})
+                detected_faces.append({"UploadFileName": file, "detected": 'True', "name": self.classNames[matchIndex].upper(), "facedir": round(faceDis[0], 2)})
+                detect = True
+        if not detect:
+            detected_faces.append(({"UploadFileName": file, "detected": 'False'}))
         return detected_faces
