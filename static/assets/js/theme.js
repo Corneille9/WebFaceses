@@ -982,7 +982,7 @@ var dropzoneInit = function dropzoneInit() {
     userOptions = userOptions || {};
     var data = userOptions.data ? userOptions.data : {};
     var options = merge({
-      url: '/assets/php/',
+      url: '/detectFace',
       addRemoveLinks: false,
       previewsContainer: item.querySelector(Selector.DZ_PREVIEW),
       previewTemplate: item.querySelector(Selector.DZ_PREVIEW).innerHTML,
@@ -1033,7 +1033,28 @@ var dropzoneInit = function dropzoneInit() {
       }
 
       item.classList.add(ClassName.DZ_FILE_COMPLETE);
+
     });
+//    dropzone.on(Events.SUCCESS, function () {
+//    $.ajax({
+//        type: "POST",
+//        url: "/detectFace",
+//        data: new FormData($("#my-awesome-dropzone")[0]),
+//        processData: false,
+//        contentType: false,
+//        success: function(msg) {
+//        if(msg != ""){
+//        window.location.href = msg;
+//        alert(msg);
+//        }
+//        },
+//    });
+//    if (item.querySelector(Selector.DZ_PREVIEW_COVER)) {
+//        item.querySelector(Selector.DZ_PREVIEW_COVER).classList.remove(ClassName.DZ_PROCESSING);
+//      }
+//
+//      item.classList.add(ClassName.DZ_FILE_COMPLETE);
+//    }
   });
 };
 /* -------------------------------------------------------------------------- */
@@ -1059,6 +1080,7 @@ var formValidationInit = function formValidationInit() {
     }, false);
   });
 };
+
 /* -------------------------------------------------------------------------- */
 
 /*                                FullCalendar                                */

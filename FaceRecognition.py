@@ -10,14 +10,12 @@ class FaceRecognition:
         self.images = []
         self.classNames = []
         self.myList = os.listdir(path)
-        print(self.myList)
 
     def build_classNames(self):
         for cl in self.myList:
             curImg = cv2.imread(f'{self.path}/{cl}')
             self.images.append(curImg)
             self.classNames.append(os.path.splitext(cl)[0])
-        print(self.classNames)
 
     def find_encodings(self, images):
         encodeList = []
