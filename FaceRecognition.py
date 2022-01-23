@@ -26,7 +26,7 @@ class FaceRecognition:
             encodeList.append(encode)
         return encodeList
 
-    def detect_face(self, file='ImagesBasic/corneille1.jpg'):
+    def detect_face(self, file='ImagesBasic/pop.png'):
         self.build_classNames()
         encodeListKnown = self.find_encodings(self.images)
         print('Encoding Complete')

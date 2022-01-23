@@ -34,4 +34,5 @@ async def upload():
     return jsonify({"result": "HTTP/200 ok"})
 
 
-app.run(host=socket.gethostname(), port=80, debug=True)
+if __name__ == "__main__":
+    app.run(host=socket.gethostname(), port=80, debug=True)
